@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:14.2
+    environment:
+      - POSTGRES_DB=web3
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+
+
+  app:
+    build: ./
+    container_name: "web3"
+    ports:
+      - "8080:8080"
+
