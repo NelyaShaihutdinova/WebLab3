@@ -109,27 +109,46 @@ let yCoordinate;
 document.querySelector('#graph').onmousemove = function (event) {
     xCoordinate = ((event.offsetX - w / 2) / ((w - w / 6.4) / 2) * rValue).toFixed(2)
     yCoordinate = ((h / 2 - event.offsetY) / ((w - w / 6.4) / 2) * rValue).toFixed(2)
-    document.querySelector('#inputText').placeholder = yCoordinate
-    document.querySelector('#x').innerHTML = xCoordinate
+    document.querySelector('#yCoordinate').placeholder = yCoordinate
+    document.querySelector('#xCoordinate').innerHTML = xCoordinate
 }
-document.querySelector('#graph').onclick = function () {
-    // if (xCoordinate === undefined || yCoordinate === undefined) {
-    //     alert("select the radius")
-    // } else {
-    console.log(xCoordinate);
-    console.log(yCoordinate);
-    send(xCoordinate, yCoordinate, rValue)
-    // }
+document.querySelector('#graph').onclick = async function () {
+    if (xCoordinate === undefined || yCoordinate === undefined) {
+        alert("select the radius")
+    } else {
+        let x = xCoordinate;
+        let y = yCoordinate;
+        const responseData = await addPoint(
+            [
+                {name: "X", value: xCoordinate.toString()},
+                {name: "Y", value: yCoordinate.toString()},
+                {name: "R", value: rValue.toString()}
+            ]
+        );
+        drawPoint(x, y, rValue)
+    }
 }
 
-function drawPoint(x, y, result) {
-    console.log(rValue)
-    ctx.fillStyle = Boolean(result) ? "green" : "red"
+function drawPoint(x, y, r) {
+    const res = checkCircle(x, y, r) || checkTriangle(x, y, r) || checkSquare(x, y, r);
+    ctx.fillStyle = res ? "green" : "red"
     ctx.beginPath();
     ctx.arc(x * ((w - w / 6.4) / 2) / rValue + w / 2, -y * ((w - w / 6.4) / 2) / rValue + h / 2, 5, 0, 2 * Math.PI, false);
     ctx.fill();
     ctx.stroke();
     ctx.closePath();
+}
+
+function checkTriangle(x, y, r) {
+    return 0 <= x && x <= r / 2 && -r <= y && y <= 0 && Math.abs(y) / 2 + x <= r / 2;
+}
+
+function checkCircle(x, y, r) {
+    return x * x + y * y <= r * r && -r / 2 <= x && x <= 0 && 0 >= y && y >= -r / 2;
+}
+
+function checkSquare(x, y, r) {
+    return -r <= x && x <= 0 && 0 <= y && y <= r / 2;
 }
 
 function redrawPoint() {

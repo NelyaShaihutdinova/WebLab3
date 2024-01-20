@@ -5,7 +5,7 @@
     font-size: 20px;
 }
 
-button {
+.btn {
     appearance: none;
     background-color: #a670db;
     border: 1px solid rgba(27, 31, 35, 0.15);
@@ -31,20 +31,70 @@ button {
     word-wrap: break-word;
 }
 
-button:hover {
+.btn:hover {
     background-color: #c28bde;
     text-decoration: none;
     transition-duration: 0.1s;
 }
 
-button:disabled {
+.ui-button-text {
+    appearance: none;
+    background-color: #a670db;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 10px;
+    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgb(60, 36, 108) 0 1px 0 inset;
+    box-sizing: border-box;
+    color: #3c246c;
+    cursor: pointer;
+    display: inline-block;
+    font-family: fantasy;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    padding: 6px 16px;
+    position: relative;
+    transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    word-wrap: break-word;
+}
+
+.ui-button-text:disabled {
     background-color: #254f79;
     border-color: rgba(27, 31, 35, 0.15);
     color: #0b4e91;
     cursor: default;
 }
 
-button:active {
+.ui-button-text:active {
+    background-color: #d9aeec;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+    transition: none 0s;
+}
+
+.ui-button-text:hover {
+    background-color: #c28bde;
+    text-decoration: none;
+    transition-duration: 0.1s;
+}
+
+body .ui-button {
+    background: #d9aeec;
+    border-color: #d9aeec;
+}
+
+.btn:disabled {
+    background-color: #254f79;
+    border-color: rgba(27, 31, 35, 0.15);
+    color: #0b4e91;
+    cursor: default;
+}
+
+.btn:active {
     background-color: #d9aeec;
     box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
     transition: none 0s;
@@ -76,6 +126,21 @@ button:active {
     "B B B B   C C C C   C C C C";
     column-gap: 25px;
     row-gap: 25px;
+}
+
+.clockContainer {
+    height: 10em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clockContainer .btn {
+    margin: 0;
+}
+
+.clockContainer #clock {
+    margin: 0;
 }
 
 .header {
