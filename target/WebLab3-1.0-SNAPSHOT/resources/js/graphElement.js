@@ -13,6 +13,7 @@ window.redrawGraph = drawGraph;
 window.redrawPoints = redrawPoint;
 
 function drawGraph(rValueFun) {
+    rValue = rValueFun;
     ctx.clearRect(0, 0, w, h);
     let r = (w - w / 6.4) / 2;
     lineLength = w / 30;
@@ -107,13 +108,19 @@ console.log(h)
 let xCoordinate;
 let yCoordinate;
 document.querySelector('#graph').onmousemove = function (event) {
-    xCoordinate = ((event.offsetX - w / 2) / ((w - w / 6.4) / 2) * rValue).toFixed(2)
-    yCoordinate = ((h / 2 - event.offsetY) / ((w - w / 6.4) / 2) * rValue).toFixed(2)
-    document.querySelector('#yCoordinate').placeholder = yCoordinate
-    document.querySelector('#xCoordinate').innerHTML = xCoordinate
+    event = event || window.event
+    if (typeof rValue !== 'string') {
+        console.log(rValue)
+        xCoordinate = ((event.offsetX - w / 2) / ((w - w / 6.4) / 2) * rValue).toFixed(2)
+        yCoordinate = ((h / 2 - event.offsetY) / ((w - w / 6.4) / 2) * rValue).toFixed(2)
+        document.querySelector('#yCoordinate').innerHTML = yCoordinate
+        document.querySelector('#xCoordinate').innerHTML = xCoordinate
+        console.log(xCoordinate)
+        console.log(yCoordinate)
+    }
 }
 document.querySelector('#graph').onclick = async function () {
-    if (xCoordinate === undefined || yCoordinate === undefined) {
+    if (xCoordinate === undefined || yCoordinate === undefined || rValue === undefined) {
         alert("select the radius")
     } else {
         let x = xCoordinate;
@@ -130,7 +137,7 @@ document.querySelector('#graph').onclick = async function () {
 }
 
 function drawPoint(x, y, r) {
-    const res = checkCircle(x, y, r) || checkTriangle(x, y, r) || checkSquare(x, y, r);
+    let res = checkCircle(x, y, r) || checkTriangle(x, y, r) || checkSquare(x, y, r);
     ctx.fillStyle = res ? "green" : "red"
     ctx.beginPath();
     ctx.arc(x * ((w - w / 6.4) / 2) / rValue + w / 2, -y * ((w - w / 6.4) / 2) / rValue + h / 2, 5, 0, 2 * Math.PI, false);
@@ -152,13 +159,13 @@ function checkSquare(x, y, r) {
 }
 
 function redrawPoint() {
+    console.log("redraw points")
     const table = document.getElementById("result_data");
     if (table) {
         for (let item of table.rows) {
             const x = parseFloat(item.children[0].innerText.trim().replace(",", "."));
             const y = parseFloat(item.children[1].innerText.trim().replace(",", "."));
             const r = parseFloat(item.children[2].innerText.trim().replace(",", "."));
-
             if (isNaN(x) || isNaN(y) || isNaN(r)) continue;
             drawPoint(x, y, rValue);
         }

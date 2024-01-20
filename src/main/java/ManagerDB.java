@@ -15,7 +15,6 @@ import java.util.Map;
 @SessionScoped
 public class ManagerDB implements Serializable {
     private static Connection connection;
-
     static {
         try {
             connection = DriverManager.getConnection("jdbc:postgresql://postgres:5432/web3", "user", "password");
@@ -51,7 +50,6 @@ public class ManagerDB implements Serializable {
             float x = Float.parseFloat(params.get("X"));
             float y = Float.parseFloat(params.get("Y"));
             int graphR = Integer.parseInt(params.get("R"));
-
             final Point point = new Point(
                     x,
                     y,
@@ -59,7 +57,6 @@ public class ManagerDB implements Serializable {
             );
             addPointToTable(point);
             PrimeFaces.current().ajax().addCallbackParam("isHit", point.isHit());
-
         } catch (IllegalArgumentException | NullPointerException e) {
             e.printStackTrace();
         }
@@ -68,7 +65,6 @@ public class ManagerDB implements Serializable {
     public List<Point> getPoints() {
         List<Point> pointsList = new ArrayList<>();
         try {
-
             ResultSet rs = connection.createStatement().executeQuery("select * from results");
             while (rs.next()) {
                 pointsList.add(0, new Point(rs.getFloat("x"), rs.getFloat("y"), rs.getInt("r"), rs.getBoolean("result")));
@@ -88,6 +84,4 @@ public class ManagerDB implements Serializable {
             throw new RuntimeException(e);
         }
     }
-
-
 }

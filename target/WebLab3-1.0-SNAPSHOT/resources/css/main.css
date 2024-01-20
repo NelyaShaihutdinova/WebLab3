@@ -70,6 +70,11 @@
     cursor: default;
 }
 
+.clockContainer #clock {
+    margin: 0;
+    color: #3c246c;
+}
+
 .ui-button-text:active {
     background-color: #d9aeec;
     box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
@@ -82,10 +87,15 @@
     transition-duration: 0.1s;
 }
 
-body .ui-button {
-    background: #d9aeec;
-    border-color: #d9aeec;
+.body .ui-button {
+    background: none;
+    color: #fff;
+    border: 0;
+    margin: 0;
+    outline: 0 none;
+    border-radius: 4px;
 }
+
 
 .btn:disabled {
     background-color: #254f79;
@@ -139,9 +149,6 @@ body .ui-button {
     margin: 0;
 }
 
-.clockContainer #clock {
-    margin: 0;
-}
 
 .header {
     grid-area: A;
@@ -204,7 +211,6 @@ body .ui-button {
 }
 
 
-
 span[title] {
     position: relative;
 }
@@ -238,3 +244,14 @@ span:hover:not([title])::after,
 span:hover:not([title])::before {
     display: none;
 }
+
+body .ui-button.ui-state-hover{
+    background: 0;
+    border: 0;
+}
+
+body .ui-button {
+    background: 0;
+    border: 0;
+}
+
