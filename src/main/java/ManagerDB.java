@@ -50,11 +50,7 @@ public class ManagerDB implements Serializable {
             float x = Float.parseFloat(params.get("X"));
             float y = Float.parseFloat(params.get("Y"));
             int graphR = Integer.parseInt(params.get("R"));
-            final Point point = new Point(
-                    x,
-                    y,
-                    graphR
-            );
+            final Point point = new Point(x, y, graphR);
             addPointToTable(point);
             PrimeFaces.current().ajax().addCallbackParam("isHit", point.isHit());
         } catch (IllegalArgumentException | NullPointerException e) {

@@ -120,7 +120,8 @@ document.querySelector('#graph').onmousemove = function (event) {
     }
 }
 document.querySelector('#graph').onclick = async function () {
-    if (xCoordinate === undefined || yCoordinate === undefined || rValue === undefined) {
+    console.log(rValue)
+    if (rValue == 0 || rValue === undefined || rValue === NaN) {
         alert("select the radius")
     } else {
         let x = xCoordinate;
@@ -147,7 +148,7 @@ function drawPoint(x, y, r) {
 }
 
 function checkTriangle(x, y, r) {
-    return 0 <= x && x <= r / 2 && -r <= y && y <= 0 && Math.abs(y) / 2 + x <= r / 2;
+    return 0 <= x && x <= (parseFloat(r) / 2) && (-parseFloat(r)) <= y && y <= 0 && Math.abs(y) / 2 + x <= (parseFloat(r) / 2);
 }
 
 function checkCircle(x, y, r) {
