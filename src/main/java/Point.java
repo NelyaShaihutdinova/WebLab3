@@ -85,15 +85,14 @@ public class Point implements Serializable {
     }
 
     private boolean checkTriangle() {
-        return 0 <= x && x <= (float) r / 2 && (float) -r  <= y && y <= 0 && Math.abs(y) / 2 + x <= (float) r / 2;
-    }
+        return 0 <= x && x <= ((float)r) / 2 && ((float)r) >= y && y >= 0 && Math.abs(y) / 2 + x <= ((float)r / 2);}
 
     private boolean checkCircle() {
         return x * x + y * y <= r * r && -r / 2 <= x && x <= 0 && 0 >= y && y >= -r / 2;
     }
 
     private boolean checkSquare() {
-        return -r <= x && x <= 0 && 0 <= y && y <= r / 2;
+        return r >= x && x >= 0 && 0 >= y && y >= -r;
     }
 
 }

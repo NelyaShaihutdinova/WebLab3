@@ -29,7 +29,7 @@ public class ManagerDB implements Serializable {
             throw new RuntimeException(e);
         }
     }
-    @Transactional
+
     public void addPointToTable(Point point) {
         System.out.println(point);
         try {
@@ -43,7 +43,7 @@ public class ManagerDB implements Serializable {
             System.out.println("Ошибка в добавлении точки");
         }
     }
-    @Transactional
+
     public void addPointToTableFromJSON() {
         final Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         try {

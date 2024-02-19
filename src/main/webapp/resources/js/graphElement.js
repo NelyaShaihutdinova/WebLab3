@@ -65,13 +65,14 @@ function drawGraph(rValueFun) {
     ctx.beginPath();
     ctx.moveTo(w / 2, h / 2);
     ctx.arc(w / 2, h / 2, r / 2, 1 / 2 * Math.PI, Math.PI, false);
-    ctx.lineTo(w / 2 - r, h / 2);
-    ctx.lineTo(w / 2 - r, h / 2 - r / 2);
-    ctx.lineTo(w / 2, h / 2 - r / 2);
+    ctx.moveTo(w / 2, h / 2);
+    ctx.lineTo(w / 2, h / 2 + r);
+    ctx.lineTo(w / 2 + r, h / 2 + r);
+    ctx.lineTo(w / 2 + r, h / 2);
     ctx.lineTo(w / 2, h / 2);
     ctx.lineTo(w / 2 + r / 2, h / 2);
-    ctx.lineTo(w / 2, h / 2 + r);
-    ctx.lineTo(w / 2, h / 2 + r / 2);
+    ctx.lineTo(w / 2, h / 2 - r);
+    ctx.lineTo(w / 2, h / 2);
     ctx.fill();
     ctx.moveTo(w / 2, h / 2);
     ctx.lineTo(w / 2 - r / 2, h / 2);
@@ -148,7 +149,7 @@ function drawPoint(x, y, r) {
 }
 
 function checkTriangle(x, y, r) {
-    return 0 <= x && x <= (parseFloat(r) / 2) && (-parseFloat(r)) <= y && y <= 0 && Math.abs(y) / 2 + x <= (parseFloat(r) / 2);
+    return 0 <= x && x <= (r) / 2 && (r) >= y && y >= 0 && Math.abs(y) / 2 + x <= (r / 2);
 }
 
 function checkCircle(x, y, r) {
@@ -156,7 +157,7 @@ function checkCircle(x, y, r) {
 }
 
 function checkSquare(x, y, r) {
-    return -r <= x && x <= 0 && 0 <= y && y <= r / 2;
+    return r >= x && x >= 0 && 0 >= y && y >= -r;
 }
 
 function redrawPoint() {
